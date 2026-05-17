@@ -10,10 +10,8 @@ Powered entirely by **GitHub Actions** and the **Fyers API v3**, the pipeline ru
 ## 🚀 Key Features
 
 * **Zero-Infrastructure Automation:** Uses GitHub Actions crons to execute data runs entirely free, eliminating the need for a 24/7 dedicated VPS.
-* **Market-Hours Alignment:** Automatically triggers every 15 minutes between **9:15 AM IST and 3:30 PM IST**, Monday through Friday.
 * **Smart Rate-Limiting:** Built-in sleep throttles guarantee conformance with the Fyers API single-second request thresholds.
 * **Failover & Retry Architecture:** Implements a 5-attempt fallback loop per symbol to survive random network drops or API gateway timeouts.
-* **Dynamic Token Management:** Pulls valid OAuth access tokens on-the-fly from a centralized remote endpoint (`PythonAnywhere`), avoiding authentication stagnation.
 * **Incremental Delta Storage:** Merges new market snapshots directly into existing localized JSON structures sequentially.
 
 ---
@@ -110,21 +108,6 @@ python scraper.py
 ## ⚙️ Automated Deployment (GitHub Actions Setup)
 
 To seamlessly operationalize the background data pipeline pipelines, verify the following configuration switches are checked:
-
-### ⚠️ Crucial Step: Workflow Write Access
-
-By default, GitHub Workflow Bots cannot push newly extracted files back up to your codebase without explicit authorization.
-
-1. Navigate to your repository's **Settings** tab.
-2. Select **Actions** $\rightarrow$ **General** from the sidebar.
-3. Scroll downwards to find **Workflow permissions**.
-4. Change the toggle selection from *Read repository contents permission* to **Read and write permissions**.
-5. Hit **Save**.
-
-### Manual Activation Trigger
-
-If you want to force an instantaneous execution run outside of the standard Indian market hours timeline:
-Go to your repository's **Actions** tab $\rightarrow$ select **NSE Options Chain Scraper** $\rightarrow$ click the **Run workflow** drop-down menu.
 
 ---
 
