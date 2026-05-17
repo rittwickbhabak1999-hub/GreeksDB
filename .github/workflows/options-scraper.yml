@@ -1,0 +1,50 @@
+name: NSE Options Chain Scraper
+
+on:
+  workflow_dispatch: # Allows you to trigger the run manually from the GitHub UI
+  schedule:
+    # GitHub Cron uses UTC. IST is UTC+5:30.
+    # Mon-Fri (1-5)
+    
+    # Run at 09:15 AM IST (03:45 AM UTC)
+    - cron: '45 3 * * 1-5'
+    
+    # Run every 15 mins from 09:30 AM IST (04:00 AM UTC) to 03:15 PM IST (09:45 AM UTC)
+    - cron: '0,15,30,45 4-9 * * 1-5'
+    
+    # Run exactly at 03:30 PM IST (10:00 AM UTC)
+    - cron: '0 10 * * 1-5'
+
+jobs:
+  scrape-and-save:
+    runs-on: ubuntu-latest
+    
+    # We set a permission to allow GitHub Actions to commit files back to the repo
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Scraper Script
+        run: python scraper.py # Replace scraper.py with your actual python filename
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/
+          # Only commit if there are actually changes in the data folder
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update options data at $(date -u) UTC"
+          git push
