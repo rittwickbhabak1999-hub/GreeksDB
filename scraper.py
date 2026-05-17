@@ -6,6 +6,8 @@ import requests
 from fyers_apiv3 import fyersModel
 
 # Complete watchlist provided
+# Copy past the list from https://www.nseindia.com/products-services/equity-derivatives-list-underlyings-information by the following js
+# symbols=[];$0.querySelectorAll('td:nth-child(3)').forEach(symbol => symbols.push(symbol.textContent));copy(symbols);
 watchlist = [
     "360ONE", "ABB", "APLAPOLLO", "AUBANK", "ADANIENSOL", "ADANIENT", "ADANIGREEN",
     "ADANIPORTS", "ADANIPOWER", "ABCAPITAL", "ALKEM", "AMBER", "AMBUJACEM",
