@@ -1,26 +1,17 @@
 name: NSE Options Chain Scraper
 
 on:
-  workflow_dispatch: # Allows you to trigger the run manually from the GitHub UI
+  workflow_dispatch: # Allows manual execution from the UI
   schedule:
-    # GitHub Cron uses UTC. IST is UTC+5:30. Runs Mon-Fri (1-5).
-    
-    # 1. Market Open Snapshot
-    # Run at 09:15 AM IST (03:45 AM UTC) -> [1 Run]
+    # 1. Market Open Snapshot (09:15 AM IST -> 03:45 AM UTC)
     - cron: '45 3 * * 1-5'
     
-    # 2. Hourly Trend Snapshots
-    # Runs at 10:00 AM, 11:00 AM, 12:00 PM, 01:00 PM, 02:00 PM, and 03:00 PM IST
-    # (Translates to 04:30, 05:30, 06:30, 07:30, 08:30, 09:30 UTC) -> [6 Runs]
+    # 2. Hourly Trend Snapshots (10:00 AM to 03:00 PM IST -> 04:30 AM to 09:30 AM UTC)
     - cron: '30 4-9 * * 1-5'
     
-    # 3. Late Afternoon Volume Surge
-    # Run at 02:30 PM IST (09:00 AM UTC) -> [1 Run]
-    - cron: '0 9 * * 1-5'
-    
-    # 4. Final Market Close Settlement Snapshot
-    # Run at 03:30 PM IST (10:00 AM UTC) -> [1 Run]
-    - cron: '0 10 * * 1-5'
+    # 3. Volume Surge & Market Close (02:30 PM & 03:30 PM IST -> 09:00 AM & 10:00 AM UTC)
+    - cron: '0 9,10 * * 1-5'
+
 
 jobs:
   scrape-and-save:
