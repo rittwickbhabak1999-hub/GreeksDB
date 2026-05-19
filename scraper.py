@@ -82,40 +82,68 @@ def gatekeeper(file_path, start_time_str, end_time_str, log_format="%d-%m-%Y %H:
 # Complete watchlist provided
 # Copy past the list from https://www.nseindia.com/products-services/equity-derivatives-list-underlyings-information by the following js
 # symbols=[];$0.querySelectorAll('td:nth-child(3)').forEach(symbol => symbols.push(symbol.textContent));copy(symbols);
-watchlist = [
-    "360ONE", "ABB", "APLAPOLLO", "AUBANK", "ADANIENSOL", "ADANIENT", "ADANIGREEN",
-    "ADANIPORTS", "ADANIPOWER", "ABCAPITAL", "ALKEM", "AMBER", "AMBUJACEM",
-    "ANGELONE", "APOLLOHOSP", "ASHOKLEY", "ASIANPAINT", "ASTRAL", "AUROPHARMA",
-    "DMART", "AXISBANK", "BSE", "BAJAJ-AUTO", "BAJFINANCE", "BAJAJFINSV",
-    "BAJAJHLDNG", "BANDHANBNK", "BANKBARODA", "BANKINDIA", "BDL", "BEL",
-    "BHARATFORG", "BHEL", "BPCL", "BHARTIARTL", "BIOCON", "BLUESTARCO", "BOSCHLTD",
-    "BRITANNIA", "CGPOWER", "CANBK", "CDSL", "CHOLAFIN", "CIPLA", "COALINDIA",
-    "COCHINSHIP", "COFORGE", "COLPAL", "CAMS", "CONCOR", "CROMPTON",
-    "CUMMINSIND", "DLF", "DABUR", "DALBHARAT", "DELHIVERY", "DIVISLAB",
-    "DIXON", "DRREDDY", "ETERNAL", "EICHERMOT", "EXIDEIND", "FORCEMOT",
-    "NYKAA", "FORTIS", "GAIL", "GMRAIRPORT", "GLENMARK", "GODFRYPHLP",
-    "GODREJCP", "GODREJPROP", "GRASIM", "HCLTECH", "HDFCAMC", "HDFCBANK",
-    "HDFCLIFE", "HAVELLS", "HEROMOTOCO", "HINDALCO", "HAL", "HINDPETRO",
-    "HINDUNILVR", "HINDZINC", "POWERINDIA", "HYUNDAI", "ICICIBANK", "ICICIGI",
-    "ICICIPRULI", "IDFCFIRSTB", "ITC", "INDIANB", "IEX", "IOC", "IRFC", "IREDA",
-    "INDUSTOWER", "INDUSINDBK", "NAUKRI", "INFY", "INOXWIND", "INDIGO",
-    "JINDALSTEL", "JSWENERGY", "JSWSTEEL", "JIOFIN", "JUBLFOOD", "KEI",
-    "KPITTECH", "KALYANKJIL", "KAYNES", "KFINTECH", "KOTAKBANK", "LTF",
-    "LICHSGFIN", "LTM", "LT", "LAURUSLABS", "LICI", "LODHA", "LUPIN", "M&M",
-    "MANAPPURAM", "MANKIND", "MARICO", "MARUTI", "MFSL", "MAXHEALTH", "MAZDOCK",
-    "MOTILALOFS", "MPHASIS", "MCX", "MUTHOOTFIN", "NBCC", "NHPC", "NMDC",
-    "NTPC", "NATIONALUM", "NESTLEIND", "NAM-INDIA", "NUVAMA", "OBEROIRLTY",
-    "ONGC", "OIL", "PAYTM", "OFSS", "POLICYBZR", "PGEL", "PIIND", "PNBHOUSING",
-    "PAGEIND", "PATANJALI", "PERSISTENT", "PETRONET", "PIDILITIND", "POLYCAB",
-    "PFC", "POWERGRID", "PREMIERENE", "PRESTIGE", "PNB", "RBLBANK", "RECLTD",
-    "RVNL", "RELIANCE", "SBICARD", "SBILIFE", "SHREECEM", "SRF", "SAMMAANCAP",
-    "MOTHERSON", "SHRIRAMFIN", "SIEMENS", "SOLARINDS", "SONACOMS", "SBIN",
-    "SAIL", "SUNPHARMA", "SUPREMEIND", "SUZLON", "SWIGGY", "TATACONSUM",
-    "TVSMOTOR", "TCS", "TATAELXSI", "TMPV", "TATAPOWER", "TATASTEEL", "TECHM",
-    "FEDERALBNK", "INDHOTEL", "PHOENIXLTD", "TITAN", "TORNTPHARM", "TRENT",
-    "TIINDIA", "UNOMINDA", "UPL", "ULTRACEMCO", "UNIONBANK", "UNITDSPR", "VBL",
-    "VEDL", "VMM", "IDEA", "VOLTAS", "WAAREEENER", "WIPRO", "YESBANK", "ZYDUSLIFE"
-]
+# watchlist = [
+#     "360ONE", "ABB", "APLAPOLLO", "AUBANK", "ADANIENSOL", "ADANIENT", "ADANIGREEN",
+#     "ADANIPORTS", "ADANIPOWER", "ABCAPITAL", "ALKEM", "AMBER", "AMBUJACEM",
+#     "ANGELONE", "APOLLOHOSP", "ASHOKLEY", "ASIANPAINT", "ASTRAL", "AUROPHARMA",
+#     "DMART", "AXISBANK", "BSE", "BAJAJ-AUTO", "BAJFINANCE", "BAJAJFINSV",
+#     "BAJAJHLDNG", "BANDHANBNK", "BANKBARODA", "BANKINDIA", "BDL", "BEL",
+#     "BHARATFORG", "BHEL", "BPCL", "BHARTIARTL", "BIOCON", "BLUESTARCO", "BOSCHLTD",
+#     "BRITANNIA", "CGPOWER", "CANBK", "CDSL", "CHOLAFIN", "CIPLA", "COALINDIA",
+#     "COCHINSHIP", "COFORGE", "COLPAL", "CAMS", "CONCOR", "CROMPTON",
+#     "CUMMINSIND", "DLF", "DABUR", "DALBHARAT", "DELHIVERY", "DIVISLAB",
+#     "DIXON", "DRREDDY", "ETERNAL", "EICHERMOT", "EXIDEIND", "FORCEMOT",
+#     "NYKAA", "FORTIS", "GAIL", "GMRAIRPORT", "GLENMARK", "GODFRYPHLP",
+#     "GODREJCP", "GODREJPROP", "GRASIM", "HCLTECH", "HDFCAMC", "HDFCBANK",
+#     "HDFCLIFE", "HAVELLS", "HEROMOTOCO", "HINDALCO", "HAL", "HINDPETRO",
+#     "HINDUNILVR", "HINDZINC", "POWERINDIA", "HYUNDAI", "ICICIBANK", "ICICIGI",
+#     "ICICIPRULI", "IDFCFIRSTB", "ITC", "INDIANB", "IEX", "IOC", "IRFC", "IREDA",
+#     "INDUSTOWER", "INDUSINDBK", "NAUKRI", "INFY", "INOXWIND", "INDIGO",
+#     "JINDALSTEL", "JSWENERGY", "JSWSTEEL", "JIOFIN", "JUBLFOOD", "KEI",
+#     "KPITTECH", "KALYANKJIL", "KAYNES", "KFINTECH", "KOTAKBANK", "LTF",
+#     "LICHSGFIN", "LTM", "LT", "LAURUSLABS", "LICI", "LODHA", "LUPIN", "M&M",
+#     "MANAPPURAM", "MANKIND", "MARICO", "MARUTI", "MFSL", "MAXHEALTH", "MAZDOCK",
+#     "MOTILALOFS", "MPHASIS", "MCX", "MUTHOOTFIN", "NBCC", "NHPC", "NMDC",
+#     "NTPC", "NATIONALUM", "NESTLEIND", "NAM-INDIA", "NUVAMA", "OBEROIRLTY",
+#     "ONGC", "OIL", "PAYTM", "OFSS", "POLICYBZR", "PGEL", "PIIND", "PNBHOUSING",
+#     "PAGEIND", "PATANJALI", "PERSISTENT", "PETRONET", "PIDILITIND", "POLYCAB",
+#     "PFC", "POWERGRID", "PREMIERENE", "PRESTIGE", "PNB", "RBLBANK", "RECLTD",
+#     "RVNL", "RELIANCE", "SBICARD", "SBILIFE", "SHREECEM", "SRF", "SAMMAANCAP",
+#     "MOTHERSON", "SHRIRAMFIN", "SIEMENS", "SOLARINDS", "SONACOMS", "SBIN",
+#     "SAIL", "SUNPHARMA", "SUPREMEIND", "SUZLON", "SWIGGY", "TATACONSUM",
+#     "TVSMOTOR", "TCS", "TATAELXSI", "TMPV", "TATAPOWER", "TATASTEEL", "TECHM",
+#     "FEDERALBNK", "INDHOTEL", "PHOENIXLTD", "TITAN", "TORNTPHARM", "TRENT",
+#     "TIINDIA", "UNOMINDA", "UPL", "ULTRACEMCO", "UNIONBANK", "UNITDSPR", "VBL",
+#     "VEDL", "VMM", "IDEA", "VOLTAS", "WAAREEENER", "WIPRO", "YESBANK", "ZYDUSLIFE"
+# ]
+
+def get_fno_symbols():
+  url1 = 'https://www.nseindia.com'
+  url2 = 'https://www.nseindia.com/api/underlying-information'
+
+
+  session = requests.Session()
+  headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36',
+      'Accept': '*/*',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Accept-Encoding': 'gzip, deflate, br, zstd',
+      'Connection': 'keep-alive',
+      'Referer': 'https://www.nseindia.com',
+      'sec-ch-ua-platform': '"Windows"',
+      'Sec-Fetch-Site': 'same-origin',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Dest': 'empty',
+  }
+  res1 = session.get(url1, headers=headers)
+  res2 = session.get(url2, headers=headers, cookies=res1.cookies.get_dict())
+
+  fno_list =  list(filter(lambda symbol : symbol != "", list(map(lambda obj : obj.get("symbol", ""), res2.json().get("data", {}).get("UnderlyingList", [])))))
+
+  return fno_list
+
+watchlist = get_fno_symbols()
+
 
 # Fetch access token from your PythonAnywhere app
 try:
