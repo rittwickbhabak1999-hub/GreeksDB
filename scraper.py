@@ -137,6 +137,8 @@ def get_fno_symbols():
   }
   res1 = session.get(url1, headers=headers)
   res2 = session.get(url2, headers=headers, cookies=res1.cookies.get_dict())
+  print(res1.status_code)
+  print(res2.status_code)
 
   fno_list =  list(filter(lambda symbol : symbol != "", list(map(lambda obj : obj.get("symbol", ""), res2.json().get("data", {}).get("UnderlyingList", [])))))
 
